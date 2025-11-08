@@ -41,4 +41,4 @@ console.log(teacher4);
 
 // Attempting to modify readonly properties will result in a TypeScript error:
 // teacher3.firstName = 'Jonathan'; // Error: Cannot assign to 'firstName' because it is a read-only property.
-//interface Director extends Teacher
+// "interface Director extends Teacher"
