@@ -9,4 +9,4 @@ namespace Subjects {
 }
 
 
-
+// task_4/js/subjects/Subject.ts doesn't contain: ["setTeacher(teacher:Teacher)"]
