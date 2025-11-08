@@ -73,19 +73,18 @@ executeWork(createEmployee(1000)); // Expected: Getting to director tasks
 
 
 
-
 // --- Base Classes and Interfaces (from Task 1) ---
 
 interface DirectorInterface {
   workFromHome(): string;
   getCoffeeBreak(): string;
-  workDirectorTasks(): void; // Changed to void to match console.log expectation
+  workDirectorTasks(): string; // Changed to return string
 }
 
 interface TeacherInterface {
   workFromHome(): string;
   getCoffeeBreak(): string;
-  workTeacherTasks(): void; // Changed to void to match console.log expectation
+  workTeacherTasks(): string; // Changed to return string
 }
 
 class Director implements DirectorInterface {
@@ -93,9 +92,9 @@ class Director implements DirectorInterface {
   getCoffeeBreak = () => 'Getting a coffee break';
   
   /**
-   * Logs the director's tasks to the console.
+   * Returns the director's tasks as a string.
    */
-  workDirectorTasks = () => console.log('Getting to director tasks');
+  workDirectorTasks = (): string => 'Getting to director tasks';
 }
 
 class Teacher implements TeacherInterface {
@@ -103,9 +102,9 @@ class Teacher implements TeacherInterface {
   getCoffeeBreak = () => 'Cannot have a break';
 
   /**
-   * Logs the teacher's tasks to the console.
+   * Returns the teacher's tasks as a string.
    */
-  workTeacherTasks = () => console.log('Getting to work');
+  workTeacherTasks = (): string => 'Getting to work';
 }
 
 /**
@@ -120,13 +119,6 @@ function createEmployee(salary: number | string): Director | Teacher {
   return new Director();
 }
 
-
-
-
-
-
-
-
 // --- Task 2: Functions specific to employees ---
 
 /**
@@ -139,7 +131,7 @@ type Employee = Director | Teacher;
  * @param employee - The employee to check (Director | Teacher).
  * @returns True if the employee is a Director, false otherwise.
  */
-function isDirector(employee: Employee): employee is Director {
+export function isDirector(employee: Employee): employee is Director {
   // We can check if the 'workDirectorTasks' method exists on the object.
   // This is a reliable way to distinguish Director from Teacher.
   return (employee as Director).workDirectorTasks !== undefined;
@@ -152,20 +144,20 @@ function isDirector(employee: Employee): employee is Director {
  * Executes the appropriate work task based on the employee's type.
  * @param employee - The employee (Director | Teacher) to execute work for.
  */
-function executeWork(employee: Employee): void {
+function executeWork(employee: Employee): string { // Changed return type to string
   if (isDirector(employee)) {
     // The compiler now knows 'employee' is of type Director
-    employee.workDirectorTasks();
+    return employee.workDirectorTasks(); // Added return
   } else {
     // The compiler knows 'employee' must be of type Teacher
-    employee.workTeacherTasks();
+    return employee.workTeacherTasks(); // Added return
   }
 }
 
 // --- Expected Result ---
 
 console.log('Testing with salary 200 (should be Teacher):');
-executeWork(createEmployee(200));
+console.log(executeWork(createEmployee(200))); // Log the returned value
 
 console.log('Testing with salary 1000 (should be Director):');
-executeWork(createEmployee(1000));
+console.log(executeWork(createEmployee(1000))); // Log the returned value
