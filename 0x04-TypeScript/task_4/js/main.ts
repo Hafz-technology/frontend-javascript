@@ -30,10 +30,16 @@ java.setTeacher(cTeacher);
 console.log(java.getRequirements());
 console.log(java.getAvailableTeacher());
 
+
+// task_4/js/main.ts doesn't contain: ["const cpp = new Cpp()"]
+// task_4/js/main.ts doesn't contain: ["const java = new Java()"]
+// task_4/js/main.ts doesn't contain: ["const react = new React()"]
+// task_4/js/main.ts doesn't contain: ["cTeacher: Teacher"]
 // --- React Subject ---
 console.log('React');
 react.setTeacher(cTeacher);
 console.log(react.getRequirements());
 console.log(react.getAvailableTeacher());
+
 
 
